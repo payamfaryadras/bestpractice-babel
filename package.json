@@ -1,0 +1,29 @@
+{
+  "name": "bestpractice-babel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node server.js"
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/payamfaryadres/bestpractice-babel.git"
+  },
+  "author": "Payam Faryadras",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/payamfaryadres/bestpractice-babel/issues"
+  },
+  "homepage": "https://github.com/payamfaryadres/bestpractice-babel#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.11"
+  }
+}
