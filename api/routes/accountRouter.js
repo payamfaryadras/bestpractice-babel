@@ -1,13 +1,14 @@
 import BaseRouter from './baseRouter';
+import AccountController from '../controller/accountController';
 
 export default class AccountRouter extends BaseRouter {
 
-    constructor(){
-        super();
+    constructor(accountController){
 
-        this.Router.get('/', (req,res) => {
-            res.send('get all accounts!');
-        });
+        super(accountController);
+
+        this.Router.route('/')
+        .get(async (req, res) => this.Controller.getAllUsers(req, res));
     };
 };
 
