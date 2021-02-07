@@ -8,7 +8,7 @@ class Logger {
       transports: [
         new winston.transports.Console({
           format: winston.format.combine(
-            winston.format.timestamp('yyyy-mm-dd'),
+            winston.format.timestamp({format:'YYYY-MM-DD hh:mm:ss'}),
             winston.format.metadata({
               fillExcept: ['timestamp', 'service', 'level', 'message'],
             }),
