@@ -1,9 +1,12 @@
-import winston from 'winston'
+import winston from 'winston';
+
+
 const {printf} = winston.format;
 class Logger {
-  constructor(name,logConfig={}) {
+  constructor(name,options={}) {
+    this.name = name;
     this.logger = winston.createLogger({
-      level: logConfig.level,
+      level: options.logLevel,
       defaultMeta: { sevice: name },
       transports: [
         new winston.transports.Console({
@@ -20,8 +23,20 @@ class Logger {
     })
   }
 
+  debug(log, metadata) {
+    this.log("debug", log, metadata);
+  }
+
   info(log, metadata) {
-    this.logger.info(log, metadata)
+    this.log("info", log, metadata);
+  }
+
+  warn(log, metadata) {
+    this.log("warn", log, metadata);
+  }
+
+  error(log, metadata) {
+    this.log("error", log, metadata);
   }
 
   log(level, log, metadata) {
@@ -42,7 +57,7 @@ class Logger {
   }
 }
 
-module.exports = new Logger(process.env.APP_NAME)
+module.exports = Logger;
 
 module.getLogger = (name) => {
   return new Logger(name)
