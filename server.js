@@ -1,6 +1,7 @@
 import express from 'express';
 
 import loaders from './loaders/index';
+import config from './config/index';
 
 async function startServer() {
 
@@ -8,7 +9,7 @@ async function startServer() {
     await loaders(app);
 
 
-    app.listen(process.env.PORT || 3000, err => {
+    app.listen(config.port|| 3000, err => {
         if (err) {
             console.log(err);
             return;
