@@ -10,7 +10,7 @@ export default class AccountController extends ApiController{
 
     async getAllUsers(req,res){
 
-        this.logger.info('dfsadf');
+        this.logger.info('I am an info log', {name: 'George', tutorial: 'Logging tutorial'});
         res.send("return all users");
 
     };

@@ -1,13 +1,14 @@
 import winston from 'winston';
-
+import os from 'os';
 
 const {printf} = winston.format;
 class Logger {
   constructor(name,options={}) {
     this.name = name;
+    this.hostname = os.hostname;
     this.logger = winston.createLogger({
       level: options.logLevel,
-      defaultMeta: { sevice: name },
+      defaultMeta: { sevice: this.name },
       transports: [
         new winston.transports.Console({
           format: winston.format.combine(
