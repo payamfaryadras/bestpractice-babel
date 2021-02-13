@@ -2,25 +2,38 @@ import winston from 'winston';
 import os from 'os';
 
 const {printf} = winston.format;
+
+const transports = [
+  new winston.transports.Console({
+    format: winston.format.combine(
+      winston.format.timestamp({format:'YYYY-MM-DD hh:mm:ss'}),
+      winston.format.metadata({
+        fillExcept: ['timestamp', 'service', 'level', 'message'],
+      }),
+      winston.format.prettyPrint(),
+      winston.format.colorize(),
+      this.winstonConsoleFormat(),
+    ),
+  }),
+  new winston.transports.File({
+    filename: "./logs/" + name + ".log",
+    format: winston.format.combine(
+      winston.format.errors({ stack: true }),
+      winston.format.metadata(),
+      winston.format.json()
+    )
+  })
+]  
+
 class Logger {
   constructor(name,options={}) {
     this.name = name;
     this.hostname = os.hostname;
+    if(process.env.NODE_ENV == 'development')
     this.logger = winston.createLogger({
       level: options.logLevel,
       defaultMeta: { sevice: this.name },
-      transports: [
-        new winston.transports.Console({
-          format: winston.format.combine(
-            winston.format.timestamp({format:'YYYY-MM-DD hh:mm:ss'}),
-            winston.format.metadata({
-              fillExcept: ['timestamp', 'service', 'level', 'message'],
-            }),
-            winston.format.colorize(),
-            this.winstonConsoleFormat(),
-          ),
-        }),
-      ],
+      transports ,
     })
   }
 
